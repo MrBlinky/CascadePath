@@ -236,11 +236,12 @@ void ArduboyCore::paintScreen(unsigned char image[])
     SPDR = image[i];
     // 7 clock cycles
     asm volatile(
-      "mul __zero_reg__, __zero_reg__ \n" // 2 cycles
-      "mul __zero_reg__, __zero_reg__ \n" // 2 cycles
-      "mul __zero_reg__, __zero_reg__ \n" // 2 cycles
+      "LPM \n" // 3 cycles
+      "LPM \n" // 3 cycles
+      "LPM \n" // 3 cycles
       );
   }
+  SPSR;  
 }
 
 void ArduboyCore::blank()
